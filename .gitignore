@@ -1,0 +1,26 @@
+# Secrets
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Airflow
+logs/
+plugins/
+airflow-worker.pid
+airflow-webserver.pid
+airflow-scheduler.pid
+standalone_admin_password.txt
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# OS
+.DS_Store
+
+# Docker
+postgres-db-volume/

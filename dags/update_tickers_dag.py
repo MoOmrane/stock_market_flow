@@ -7,10 +7,6 @@ import time
 from datetime import datetime, timedelta
 import pendulum
 
-# Best Practices:
-# Python Version: 3.10+
-# Airflow Version: 2.9+ or 3.0
-
 default_args = {
     "owner": "airflow",
     "depends_on_past": False,
@@ -28,7 +24,7 @@ default_args = {
     schedule="@weekly",
     start_date=pendulum.today("UTC"),
     catchup=False,
-    tags=["stock", "maintenance", "airflow3"],
+    tags=["stock", "maintenance", "airflow"],
 )
 def update_tickers_weekly():
     @task

@@ -19,8 +19,5 @@ standalone_admin_password.txt
 .vscode/
 *.swp
 
-# OS
-.DS_Store
-
 # Docker
 postgres-db-volume/

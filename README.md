@@ -1,6 +1,6 @@
 # Stock Market Data Pipeline
 
-A robust, containerized data pipeline orchestrated with **Apache Airflow 3** to ingest, process, and store daily US stock market data.
+A robust, containerized data pipeline orchestrated with **Apache Airflow 2.9** to ingest, process, and store daily US stock market data.
 
 ## 🚀 Features
 - **Dual-DAG Architecture**:

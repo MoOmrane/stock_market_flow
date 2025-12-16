@@ -26,6 +26,7 @@ services:
       - AIRFLOW__CORE__FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
       - AIRFLOW__CORE__LOAD_EXAMPLES=False
       - AIRFLOW_VAR_MASSIVE_API_KEY=${MASSIVE_API_KEY}
+      - AIRFLOW_CONN_POSTGRES_DEFAULT=postgresql://airflow:airflow@postgres:5432/airflow
     volumes:
       - ./dags:/opt/airflow/dags
       - ./sql:/opt/airflow/sql
@@ -49,6 +50,7 @@ services:
       - AIRFLOW__CORE__FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
       - AIRFLOW__CORE__LOAD_EXAMPLES=False
       - AIRFLOW_VAR_MASSIVE_API_KEY=${MASSIVE_API_KEY}
+      - AIRFLOW_CONN_POSTGRES_DEFAULT=postgresql://airflow:airflow@postgres:5432/airflow
     volumes:
       - ./dags:/opt/airflow/dags
       - ./sql:/opt/airflow/sql

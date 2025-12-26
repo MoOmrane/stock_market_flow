@@ -24,7 +24,6 @@ default_args = {
     schedule="@weekly",
     start_date=pendulum.today("UTC"),
     catchup=False,
-    tags=["stock", "maintenance", "airflow"],
 )
 def update_tickers_weekly():
     @task
@@ -49,7 +48,7 @@ def update_tickers_weekly():
         cursor.execute(create_table_sql)
         conn.commit()
 
-        # 2. Fetch Tickers from Massive.com (Pagination)
+        # 2. Fetch Tickers from Massive.com (Paginated API)
         url = f"https://api.massive.com/v3/reference/tickers?market=stocks&active=true&limit=1000&apiKey={api_key}"
         tickers_count = 0
 

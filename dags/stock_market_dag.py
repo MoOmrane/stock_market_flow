@@ -24,7 +24,6 @@ default_args = {
     schedule=datetime.timedelta(days=1),
     start_date=pendulum.today("UTC").add(days=-30),
     catchup=True,
-    tags=["stock", "massive_api", "airflow3"],
 )
 def stock_market_pipeline():
     @task
@@ -52,15 +51,15 @@ def stock_market_pipeline():
         conn.close()
 
     @task
-    def fetch_stock_data_task(**kwargs):
+    def fetch_stock_data_task(**context):
         api_key = Variable.get("massive_api_key", default=None)
-        execution_date = kwargs["ds"]  # YYYY-MM-DD
+        execution_date = context["ds"]  # YYYY-MM-DD
 
         pg_hook = PostgresHook(postgres_conn_id="postgres_default")
         conn = pg_hook.get_conn()
         cursor = conn.cursor()
 
-        # 1. Get valid symbols from DB
+        # 1. Get valid tickers from DB
         logging.info("Fetching valid tickers from database...")
         cursor.execute("SELECT symbol FROM tickers")
         valid_tickers = set(row[0] for row in cursor.fetchall())
@@ -70,9 +69,8 @@ def stock_market_pipeline():
             logging.warning(
                 "No tickers found in DB. Please run 'update_tickers_weekly' DAG first."
             )
-            # We continue but the filter below will block everything, which is correct behavior if DB is empty.
 
-        # 2. Fetch Daily Data for ALL symbols (Grouped Endpoint)
+        # 2. Fetch Daily Data for ALL symbols
         url = f"https://api.massive.com/v2/aggs/grouped/locale/us/market/stocks/{execution_date}?adjusted=true&apiKey={api_key}"
 
         try:
